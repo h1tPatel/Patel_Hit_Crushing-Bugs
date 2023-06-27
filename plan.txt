@@ -1,0 +1,37 @@
+Problem 1: Allowing multiple puzzle pieces in one drop zone
+Solution:
+1. Analyzing the problem:
+   - Currently, the game allows multiple puzzle pieces to be dropped into a single drop zone, which is not intended behavior.
+   - We need to ensure that each drop zone can only contain one puzzle piece at a time.
+
+2. Plan for the solution:
+   - Modify the `handleDrop` function to check if the drop zone already contains a puzzle piece before appending a new one.
+   - If the drop zone is not empty, remove the existing puzzle piece from the drop zone and reparent it back to the puzzle pieces container.
+   - Then, append the dragged puzzle piece to the drop zone as before.
+
+3. Implementation steps:
+   - Inside the `handleDrop` function:
+     - Check if the drop zone already contains a puzzle piece using `this.children.length > 0`.
+     - If the drop zone is not empty:
+       - Store the existing puzzle piece as a separate variable.
+       - Remove the existing puzzle piece from the drop zone using `this.removeChild(existingPiece)`.
+       - Append the existing puzzle piece back to the puzzle pieces container using `puzzlePiecesContainer.appendChild(existingPiece)`.
+     - Finally, append the dragged puzzle piece to the drop zone using `this.appendChild(draggedPiece)`.
+
+4. Test the solution:
+   - Run the game and test dragging multiple puzzle pieces into a single drop zone.
+   - Verify that only one puzzle piece remains in the drop zone while others are reparented back to the puzzle pieces container.
+
+Problem 2: Puzzle pieces appearing in drop zones on reset/choosing a new puzzle
+Solution:
+1. Analyzing the problem:
+   - Currently, when resetting or selecting a new background image, the puzzle pieces that were already in the drop zones remain there.
+   - We need to ensure that on reset or new image selection, the puzzle pieces are removed from the drop zones and reparented back to the puzzle pieces container.
+
+2. Plan for the solution:
+   - Add functionality to the `resetPuzzlePieces` function to remove puzzle pieces from drop zones and reparent them back to the puzzle pieces container.
+   - Call the `resetPuzzlePieces` function when the "Reset" button is clicked or a new background image is selected.
+
+3. Implementation steps:
+   - Update the `resetPuzzlePieces` function:
+     - Iterate over each drop zone using a loop or `forEach` method.

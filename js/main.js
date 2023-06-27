@@ -51,6 +51,35 @@ function handleDrop(e) {
     this.appendChild(draggedPiece);
 }
 
+
+    
+
+    // function to rest image pieces when we selecr a new background image.
+
+    function changeBGImage() {
+        puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
+    
+        // Move the images from the puzzle board back to the puzzle pieces
+        dropZones.forEach(zone => {
+            const piecesInZone = zone.querySelectorAll('.puzzle-image');
+            piecesInZone.forEach(piece => {
+                const puzzlePiecesContainer = document.querySelector('.puzzle-pieces');
+                puzzlePiecesContainer.appendChild(piece);
+            });
+        });
+    
+        // this will change the puzzle piece images when a new background image is selected
+        puzzlePieces.forEach((piece, index) => {
+            const imageName = piece.alt.split(' ')[0]; // Extract the image name from alt text
+            piece.src = `images/${imageName}${this.id}.jpg`;
+        });
+    }
+    
+
+  
+  
+
+
 //event Listeners
 theButtons.forEach(button => button.addEventListener("click", changeBGImage)); 
 
